@@ -14,4 +14,11 @@ Route::group([
     ),
     'namespace'  => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
+
+    // Cadastros
+    Route::crud('cadastros/empresas', 'Cadastros\TenantCrudController');
+    Route::crud('cadastros/safra', 'Cadastros\SafraCrudController');
+    Route::crud('cadastros/cultura', 'Cadastros\CulturaCrudController');
+    Route::crud('cadastros/variedade-cultura', 'Cadastros\VariedadeCulturaCrudController');
+    Route::crud('cadastros/proprietario', 'Cadastros\ProprietarioCrudController');
 }); // this should be the absolute last line of this file

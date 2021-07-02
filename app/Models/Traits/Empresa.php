@@ -5,7 +5,7 @@
  * 
  */
 namespace App\Models\Traits;
-use App\Models\Tenant;
+use App\Models\Cadastros\Tenant;
 
 trait Empresa
 {

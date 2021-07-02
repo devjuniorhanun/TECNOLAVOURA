@@ -1,5 +1,28 @@
 models:
-  # ...
-
-controllers:
-  # ...
+  Models\Cadastros\Proprietario:
+    tenant_id: id foreign
+    uuid: uuid
+    razao_social: string unique
+    nome_fantasia: string unique
+    abreviacao: string unique
+    tipo_pagamento: enum:DEPOSITO,TRANSFERÊNCIA
+    tipo: enum:FÍSICA,JURÍDICA
+    data_nascimento: date nullable
+    nascionalidade: string nullable
+    naturalidade: string nullable
+    estado_civel: enum:"SOLTEIRO(A)","CASADO(A)","VIÚVO(A)"
+    cpf_cnpj: string nullable
+    rg_inscriacao: string nullable
+    email: string nullable
+    telefone: string nullable
+    celular: string nullable
+    status: enum:ATIVO,DESATIVADO
+    cep: string nullable
+    estado: string nullable
+    cidade: string nullable
+    bairro: string nullable
+    endereco: string nullable
+    complemento: string nullable
+    numero: string nullable
+    softDeletes: true
+    timestamps: true

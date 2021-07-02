@@ -42,7 +42,7 @@ return [
             // How many items should be shown by default by the Datatable?
             // This value can be overwritten on a specific CRUD by calling
             // $this->crud->setDefaultPageLength(50);
-            'defaultPageLength' => 10,
+            'defaultPageLength' => 25,
 
             // A 1D array of options which will be used for both the displayed option and the value, or
             // A 2D array in which the first array is used to define the value options and the second array the displayed options
@@ -70,7 +70,7 @@ return [
         'create' => [
             // Define the size/looks of the content div for all CRUDs
             // To override per view use $this->crud->setCreateContentClass('class-string')
-            'contentClass' => 'col-md-8 bold-labels',
+            'contentClass' => 'col-md-12',
 
             // When using tabbed forms (create & update), what kind of tabs would you like?
             'tabsType' => 'horizontal', //options: horizontal, vertical
@@ -106,7 +106,7 @@ return [
         'update' => [
             // Define the size/looks of the content div for all CRUDs
             // To override per view use $this->crud->setEditContentClass('class-string')
-            'contentClass'   => 'col-md-8 bold-labels',
+            'contentClass'   => 'col-md-12',
 
             // When using tabbed forms (create & update), what kind of tabs would you like?
             'tabsType' => 'horizontal', //options: horizontal, vertical
@@ -142,7 +142,7 @@ return [
         'show' => [
             // Define the size/looks of the content div for all CRUDs
             // To override per Controller use $this->crud->setShowContentClass('class-string')
-            'contentClass' => 'col-md-8',
+            'contentClass' => 'col-md-12',
         ],
 
         /*
@@ -151,7 +151,7 @@ return [
         'reorder' => [
             // Define the size/looks of the content div for all CRUDs
             // To override per Controller use $this->crud->setReorderContentClass('class-string')
-            'contentClass'   => 'col-md-8 col-md-offset-2',
+            'contentClass'   => 'col-md-12',
         ],
 
     ],
