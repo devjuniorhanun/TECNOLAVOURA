@@ -45,7 +45,7 @@ class ProprietarioCrudController extends CrudController
         CRUD::column('abreviacao')->label('Abreviação.:')->size(2);
         CRUD::column('tipo_pagamento')->label('Tipo Pagamento.:')->type('enum')->size(2);
         CRUD::column('tipo')->label('Tipo.:')->type('enum')->size(2);
-        CRUD::column('data_nascimento')->label('Data Nascimento.:')->type('date')->size(2);
+        CRUD::column('data_nascimento')->label('Data Nascimento.:')->type('date')->type('datetime')->format('DD/MM/YYYY')->size(2);
         CRUD::column('nascionalidade')->label('Nacionalidade.:')->size(2);
         CRUD::column('naturalidade')->label('Naturalidade.:')->size(2);
         CRUD::column('estado_civel')->label('Estado Civel.:')->type('enum')->size(2);
@@ -107,5 +107,33 @@ class ProprietarioCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    protected function setupShowOperation()
+    {
+        $this->crud->set('show.setFromDb', false);
+
+        CRUD::column('razao_social')->label('Razão Social')->size(3);
+        CRUD::column('nome_fantasia')->label('Nome Fantasia')->size(3);
+        CRUD::column('abreviacao')->label('Abreviação')->size(2);
+        CRUD::column('tipo_pagamento')->label('Tipo Pagamento')->type('enum')->size(2);
+        CRUD::column('tipo')->label('Tipo')->type('enum')->size(2);
+        CRUD::column('data_nascimento')->label('Data Nascimento')->type('date')->type('datetime')->format('DD/MM/YYYY')->size(2);
+        CRUD::column('nascionalidade')->label('Nacionalidade')->size(2);
+        CRUD::column('naturalidade')->label('Naturalidade')->size(2);
+        CRUD::column('estado_civel')->label('Estado Civel')->type('enum')->size(2);
+        CRUD::column('cpf_cnpj')->label('Cpf / Cnpj')->size(2)->attributes(['class' => 'form-control cpfcnpj']);
+        CRUD::column('rg_inscriacao')->label('Rg / Inscrição')->size(2);
+        CRUD::column('email')->label('Email')->type('email')->size(4);
+        CRUD::column('telefone')->label('Telefone')->size(2)->attributes(['class' => 'form-control telefone']);
+        CRUD::column('celular')->label('Celular')->size(2)->attributes(['class' => 'form-control celular']);
+        CRUD::column('status')->label('Status')->type('enum')->size(2);
+        CRUD::column('cep')->label('Cep')->size(2)->attributes(['id' => 'cep']);
+        CRUD::column('estado')->label('Estado')->size(1)->attributes(['id' => 'estado']);
+        CRUD::column('cidade')->label('Cidade')->size(2)->attributes(['id' => 'cidade']);
+        CRUD::column('bairro')->label('Bairro')->size(2)->attributes(['id' => 'bairro']);
+        CRUD::column('endereco')->label('Endereço')->size(3)->attributes(['id' => 'endereco']);
+        CRUD::column('complemento')->label('Complemento')->size(2);
+        CRUD::column('numero')->label('Número')->size(2);
     }
 }

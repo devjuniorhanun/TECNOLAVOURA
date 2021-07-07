@@ -25,7 +25,7 @@ class CulturaRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->segment(3);
+        $id = $this->get('id') ?? request()->route('id');
         return [
             'nome' => "required|min:4|max:10|unique:culturas,nome,{$id},id"
         ];

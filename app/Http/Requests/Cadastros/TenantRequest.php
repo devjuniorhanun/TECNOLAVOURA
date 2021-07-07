@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Cadastros;
 
 use App\Http\Requests\Request;
 use Illuminate\Foundation\Http\FormRequest;
@@ -25,7 +25,7 @@ class TenantRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->segment(3);
+        $id = $this->get('id') ?? request()->route('id');
         return [
             'nome' => "required|min:4|max:50|unique:tenants,nome,{$id},id",
             'cnpj' => "required|min:4|max:50|unique:tenants,cnpj,{$id},id",

@@ -25,8 +25,11 @@ class ProprietarioRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->get('id') ?? request()->route('id');
         return [
-            // 'name' => 'required|min:5|max:255'
+            'razao_social' => "required|min:3|max:50|unique:proprietarios,razao_social,{$id},id",
+            'nome_fantasia' => "required|min:3|max:50|unique:proprietarios,nome_fantasia,{$id},id",
+            'abreviacao' => "required|min:3|max:3|unique:proprietarios,abreviacao,{$id},id",
         ];
     }
 
