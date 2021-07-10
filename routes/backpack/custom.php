@@ -21,4 +21,8 @@ Route::group([
     Route::crud('cadastros/cultura', 'Cadastros\CulturaCrudController');
     Route::crud('cadastros/variedade-cultura', 'Cadastros\VariedadeCulturaCrudController');
     Route::crud('cadastros/proprietario', 'Cadastros\ProprietarioCrudController');
+    Route::crud('cadastros/produtor', 'Cadastros\ProdutorCrudController');
+    Route::crud('cadastros/fazenda', 'Cadastros\FazendaCrudController');
+    Route::crud('cadastros/talhao', 'Cadastros\TalhaoCrudController');
+    Route::get('cadastros/talhao/areaTalhao/{idTalhao}', 'Cadastros\TalhaoCrudController@areaTalhao');
 }); // this should be the absolute last line of this file

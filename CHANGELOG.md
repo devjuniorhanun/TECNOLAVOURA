@@ -7,6 +7,11 @@ e este projeto adere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html
 
 ## [Inédita]
 
+## [1.0.0] - 2021-07-07
+### Adicionada
+- Crud Produtor -> Cadastros dos Produtores.
+
+
 ## [1.0.0] - 2021-07-02
 ### Adicionada
 - Crud Empresa -> Cadastros das Empresas para ultilizar Multitenancy.

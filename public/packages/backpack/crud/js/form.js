@@ -10,8 +10,18 @@ jQuery(function($){
      var url = window.location.host;
      $(".cpf").mask("999.999.999-99");
      $('.placa').mask('SSS-9A99');
+     $('.telefone').mask('(00) 0000-0000');
+     $('.celular').mask('(00) 00000-0000');
+     $('.areas').mask("#.##0,00", { reverse: true });
+     $('.inscricao').mask('00.000.000-0');
+     //$('.valores').mask("#.##0,00", { reverse: true });
+     $('.valores').mask("#.##0,00", { reverse: true });
+     $('.volume').mask("#.##0,000", { reverse: true });
+     $('.peso').mask("#.##0", { reverse: true });
+     $('.desabilitado').attr("readonly", true);
  
      'use strict';
+     // Mascara de Cpf e Cnpj
      $(".cpfcnpj").keydown(function () {
          try {
              $(".cpfcnpj").unmask();
@@ -36,13 +46,20 @@ jQuery(function($){
          $(this).val('');
          $(this).val(currentValue);
      });
-     $('.telefone').mask('(00) 0000-0000');
-     $('.celular').mask('(00) 00000-0000');
-     $('.areas').mask("#.##0,00", { reverse: true });
-     $('.inscricao').mask('00.000.000-0');
-     //$('.valores').mask("#.##0,00", { reverse: true });
-     $('.valores').mask("#.##0,00", { reverse: true });
-     $('.volume').mask("#.##0,000", { reverse: true });
-     $('.peso').mask("#.##0", { reverse: true });
-     $('.desabilitado').attr("readonly", true);
+
+     $("#nomeTalhao").focusout(function () {
+        var fazendaId = $("#fazenda_id").val();
+        axios.get(`http://${url}/admin/servicoagricola/areaTalhao/${idTalhao}`)
+            .then(response => {
+                var areaTalhao = response.data;
+                var quantBomba = areaTalhao / capacidadeBomba
+                $("#bomba_recomendada").val(quantBomba.toFixed(3));
+                $("#area").val(areaTalhao);
+            })
+            .catch(error => {
+                console.log(error)
+            });
+         alert(fazendaId)
+     });
+     
 });

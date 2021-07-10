@@ -26,7 +26,10 @@
         <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-users"></i>Propriedades</a>
             <ul class="nav-dropdown-items">
-                <li class="nav-item"><a class="nav-link" href="{{ backpack_url('cadastros/proprietario') }}"><i class="nav-icon la la-user"></i> <span>Proprietario</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ backpack_url('cadastros/proprietario') }}"><i class="nav-icon la la-user"></i> <span>Proprietarios</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ backpack_url('cadastros/produtor') }}"><i class="nav-icon la la-user"></i> <span>Produtores</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ backpack_url('cadastros/fazenda') }}"><i class="nav-icon la la-user"></i> <span>Fazendas</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ backpack_url('cadastros/talhao') }}"><i class="nav-icon la la-user"></i> <span>Talhões</span></a></li>
                 
             </ul>
         </li>
