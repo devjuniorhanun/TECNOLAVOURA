@@ -9,25 +9,26 @@ use App\Models\Traits\Uuid;
 use Spatie\Activitylog\Traits\LogsActivity;
 use App\Models\Traits\Empresa;
 use \Backpack\CRUD\app\Models\Traits\CrudTrait;
-use Illuminate\Support\Facades\DB;
 
-class Talhao extends Model
+class MatrizFrete extends Model
 {
     use HasFactory, SoftDeletes;
+
+    use HasFactory, SoftDeletes;
+
     use LogsActivity;
     use Uuid;
     use Empresa;
     use CrudTrait;
 
-
     // Gravação do Log
-    protected static $logName = 'Talhao'; // Nome do Log
+    protected static $logName = 'MatrizFrete'; // Nome do Log
     protected static $logAttributes = ['*']; // Pega todos os campos da entidade
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
 
     // Define o nome da tabela
-    protected $table = 'talhaos';
+    protected $table = 'matriz_fretes';
 
     // Chave Primaria
     protected $primaryKey = 'id';
@@ -36,11 +37,12 @@ class Talhao extends Model
     //Define os campos da entidade
     protected $fillable = [
         'tenant_id',
-        'fazenda_id',
+        'ano_agricola_id',
+        'safra_id',
         'uuid',
-        'nome',
-        'area_total',
         'bloco',
+        'percurso',
+        'frete',
         'status',
     ];
 
@@ -52,8 +54,10 @@ class Talhao extends Model
     protected $casts = [
         'id' => 'integer',
         'tenant_id' => 'integer',
-        'fazenda_id' => 'integer',
-        'area_total' => 'double',
+        'ano_agricola_id' => 'integer',
+        'safra_id' => 'integer',
+        'frete' => 'double',
+        
     ];
 
 
@@ -62,18 +66,8 @@ class Talhao extends Model
         return $this->belongsTo(\App\Models\Cadastros\Tenant::class);
     }
 
-    public function fazenda()
+    public function safra()
     {
-        return $this->belongsTo(\App\Models\Cadastros\Fazenda::class);
-    }
-
-    public function scopeAreaUsada($query,$idFazenda)
-    {
-        $registro = $this::where('fazenda_id', '=',$idFazenda)
-                    ->addSelect(DB::raw('SUM(area_total) as areas'))->first();
-        //dd($registro);
-        return $registro;
-
-
+        return $this->belongsTo(\App\Models\Cadastros\Safra::class);
     }
 }

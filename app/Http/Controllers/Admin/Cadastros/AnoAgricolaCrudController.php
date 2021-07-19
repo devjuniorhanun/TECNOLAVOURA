@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Admin\Cadastros;
 
-use App\Http\Requests\Cadastros\SafraRequest;
+use App\Http\Requests\Cadastros\AnoAgricolaRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use PhpParser\Node\Stmt\Label;
 
 /**
- * Class SafraCrudController
+ * Class AnoAgricolaCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class SafraCrudController extends CrudController
+class AnoAgricolaCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -27,9 +26,9 @@ class SafraCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Cadastros\Safra::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/cadastros/safra');
-        CRUD::setEntityNameStrings('safra', 'safras');
+        CRUD::setModel(\App\Models\Cadastros\AnoAgricola::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/cadastros/ano-agricola');
+        CRUD::setEntityNameStrings('Ano Agrícola', 'Ano Agrícolas');
     }
 
     /**
@@ -41,14 +40,9 @@ class SafraCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::enableExportButtons();
-        CRUD::column('ano_agricola_id')->type('select')
-        ->label('Ano Agrícola')
-            ->entity('anoAgricola')
-            ->attribute('nome')
-            ->size(4);
-        CRUD::column('nome')->label('Safra.:');
-        CRUD::column('data_inicio')->label('Inicio.:')->type('datetime')->format('DD/MM/YYYY');
-        CRUD::column('data_final')->label('Final.:')->type('datetime')->format('DD/MM/YYYY');
+        CRUD::column('nome')->label('Ano Agrícola.:');
+        CRUD::column('data_abertura')->label('Abertura.:')->type('datetime')->format('DD/MM/YYYY');
+        CRUD::column('data_fechamento')->label('Fechamento.:')->type('datetime')->format('DD/MM/YYYY');
         CRUD::column('status')->label('Status.:')->size(3)->type('enum');
     }
 
@@ -60,13 +54,12 @@ class SafraCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(SafraRequest::class);
+        CRUD::setValidation(AnoAgricolaRequest::class);
 
-        CRUD::field('nome')->label('Safra.:')->size(3);
-        CRUD::field('data_inicio')->label('Inicio.:')->size(3);
-        CRUD::field('data_final')->label('Final.:')->size(3);
+        CRUD::field('nome')->label('Ano Agrícola.:')->size(3);
+        CRUD::field('data_abertura')->label('Abertura.:')->size(3);
+        CRUD::field('data_fechamento')->label('Fechamento.:')->size(3);
         CRUD::field('status')->label('Status.:')->size(3)->type('enum');
-
     }
 
     /**
@@ -84,8 +77,9 @@ class SafraCrudController extends CrudController
     {
         $this->crud->set('show.setFromDb', false);
 
-        CRUD::column('nome')->label('Safra')->size(4);
-        CRUD::column('data_inicio')->label('Inicio')->type('datetime')->format('DD/MM/YYYY')->size(4);
-        CRUD::column('data_final')->label('Final')->type('datetime')->format('DD/MM/YYYY')->size(4);
+        CRUD::column('nome')->label('Ano Agrícola');
+        CRUD::column('data_abertura')->label('Abertura')->type('datetime')->format('DD/MM/YYYY');
+        CRUD::column('data_fechamento')->label('Fechamento')->type('datetime')->format('DD/MM/YYYY');
+        CRUD::column('status')->label('Status')->size(3)->type('enum');
     }
 }

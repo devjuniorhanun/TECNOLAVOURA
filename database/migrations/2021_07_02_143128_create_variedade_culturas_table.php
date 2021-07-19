@@ -19,6 +19,7 @@ class CreateVariedadeCulturasTable extends Migration
             $table->id();
             $table->foreignId('tenant_id')->constrained();
             $table->foreignId('cultura_id')->constrained();
+            $table->foreignId('ano_agricola_id')->constrained()->default(1);
             $table->uuid('uuid');
             $table->string('nome')->unique();
             $table->string('tecnologia')->nullable();

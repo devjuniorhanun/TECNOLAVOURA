@@ -5,7 +5,7 @@ namespace App\Http\Requests\Cadastros;
 use App\Http\Requests\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
-class TalhaoRequest extends FormRequest
+class MatrizFreteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,10 +26,7 @@ class TalhaoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => "fazenda_id",
-            'nome' => "required",
-            'area_total' => "required",
-            'bloco' => "required",
+            // 'name' => 'required|min:5|max:255'
         ];
     }
 

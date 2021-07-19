@@ -10,25 +10,24 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use App\Models\Traits\Empresa;
 use \Backpack\CRUD\app\Models\Traits\CrudTrait;
 
-class Safra extends Model
+class AnoAgricola extends Model
 {
     use HasFactory, SoftDeletes;
 
-    use CrudTrait;
-    use HasFactory, SoftDeletes;
     use LogsActivity;
     use Uuid;
     use Empresa;
+    use CrudTrait;
 
 
      // Gravação do Log
-   protected static $logName = 'Safra'; // Nome do Log
+   protected static $logName = 'AnoAgricola'; // Nome do Log
    protected static $logAttributes = ['*']; // Pega todos os campos da entidade
    protected static $logOnlyDirty = true;
    protected static $submitEmptyLogs = false;
 
    // Define o nome da tabela
-   protected $table = 'safras';
+   protected $table = 'ano_agricolas';
 
    // Chave Primaria
    protected $primaryKey = 'id';
@@ -37,11 +36,10 @@ class Safra extends Model
    //Define os campos da entidade
    protected $fillable = [
         'tenant_id',
-        'ano_agricola_id',
         'uuid',
         'nome',
-        'data_inicio',
-        'data_final',
+        'data_abertura',
+        'data_fechamento',
         'status',
     ];
 
@@ -53,19 +51,13 @@ class Safra extends Model
     protected $casts = [
         'id' => 'integer',
         'tenant_id' => 'integer',
-        'ano_agricola_id' => 'integer',
-        'data_inicio' => 'date',
-        'data_final' => 'date',
+        'data_abertura' => 'date',
+        'data_fechamento' => 'date',
     ];
 
 
     public function tenant()
     {
         return $this->belongsTo(\App\Models\Cadastros\Tenant::class);
-    }
-
-    public function anoAgricola()
-    {
-        return $this->belongsTo(\App\Models\Cadastros\AnoAgricola::class);
     }
 }

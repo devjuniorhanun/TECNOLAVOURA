@@ -1,11 +1,10 @@
 models:
-  Models\Cadastros\Talhao:
+  Models\Cadastros\AnoAgricola:
     tenant_id: id foreign
-    fazenda_id: id foreign
     uuid: uuid
     nome: string unique
-    area_total: double:10,2
-    bloco: string
+    data_abertura: date nullable
+    data_fechamento: date nullable
     status: enum:ATIVO,DESATIVADO
     softDeletes: true
     timestamps: true

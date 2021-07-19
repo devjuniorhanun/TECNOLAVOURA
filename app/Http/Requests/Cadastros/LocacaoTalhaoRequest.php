@@ -5,7 +5,7 @@ namespace App\Http\Requests\Cadastros;
 use App\Http\Requests\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
-class TalhaoRequest extends FormRequest
+class LocacaoTalhaoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,10 +26,12 @@ class TalhaoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => "fazenda_id",
-            'nome' => "required",
-            'area_total' => "required",
-            'bloco' => "required",
+            'safra_id' => 'required',
+            'cultura_id' => 'required',
+            'variedade_cultura_id' => 'required',
+            'talhao_id' => 'required',
+            'area_plantada' => 'required',
+            'inicio_plantio' => 'required',
         ];
     }
 

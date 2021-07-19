@@ -7,6 +7,16 @@ e este projeto adere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html
 
 ## [Inédita]
 
+## [1.0.0] - 2021-07-13
+### Adicionada
+- Crud MatrizFrete -> Cadastros dos Valores de Fretes.
+
+## [1.0.0] - 2021-07-12
+### Adicionada
+- Crud Fazenda -> Cadastros das Fazendas.
+- Crud Talhão -> Cadastros dos Talhões das Fazenda.
+- Crud Locação de Talhões -> Cadastros das Locações dos Talhões.
+
 ## [1.0.0] - 2021-07-07
 ### Adicionada
 - Crud Produtor -> Cadastros dos Produtores.

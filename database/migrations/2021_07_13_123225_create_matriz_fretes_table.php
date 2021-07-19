@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSafrasTable extends Migration
+class CreateMatrizFretesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,14 +15,15 @@ class CreateSafrasTable extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('safras', function (Blueprint $table) {
+        Schema::create('matriz_fretes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tenant_id')->constrained();
             $table->foreignId('ano_agricola_id')->constrained()->default(1);
+            $table->foreignId('safra_id')->constrained();
             $table->uuid('uuid');
-            $table->string('nome')->unique();
-            $table->date('data_inicio')->nullable();
-            $table->date('data_final')->nullable();
+            $table->string('bloco');
+            $table->string('percurso');
+            $table->double('frete', 4, 2);
             $table->enum('status', ["ATIVO","DESATIVADO"]);
             $table->softDeletes();
             $table->timestamps();
@@ -38,6 +39,6 @@ class CreateSafrasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('safras');
+        Schema::dropIfExists('matriz_fretes');
     }
 }

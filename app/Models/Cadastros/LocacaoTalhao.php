@@ -10,7 +10,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use App\Models\Traits\Empresa;
 use \Backpack\CRUD\app\Models\Traits\CrudTrait;
 
-class Fazenda extends Model
+class LocacaoTalhao extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -21,13 +21,13 @@ class Fazenda extends Model
 
 
     // Gravação do Log
-    protected static $logName = 'Fazendas'; // Nome do Log
+    protected static $logName = 'LocacaoTalhao'; // Nome do Log
     protected static $logAttributes = ['*']; // Pega todos os campos da entidade
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
 
     // Define o nome da tabela
-    protected $table = 'fazendas';
+    protected $table = 'locacao_talhaos';
 
     // Chave Primaria
     protected $primaryKey = 'id';
@@ -36,20 +36,20 @@ class Fazenda extends Model
     //Define os campos da entidade
     protected $fillable = [
         'tenant_id',
-        'proprietario_id',
-        'produtor_id',
+        'safra_id',
+        'ano_agricola_id',
+        'cultura_id',
+        'variedade_cultura_id',
+        'talhao_id',
         'uuid',
-        'nome',
+        'area_plantada',
+        'semente_linear',
+        'semente_populacao',
+        'inicio_plantio',
+        'final_plantio',
+        'data_prevista',
+        'observacoes',
         'status',
-        'area_total',
-        'nome_gerente',
-        'cep',
-        'estado',
-        'cidade',
-        'bairro',
-        'endereco',
-        'complemento',
-        'numero',
     ];
 
     /**
@@ -60,9 +60,15 @@ class Fazenda extends Model
     protected $casts = [
         'id' => 'integer',
         'tenant_id' => 'integer',
-        'proprietario_id' => 'integer',
-        'produtor_id' => 'integer',
-        //'area_total' => 'float',
+        'ano_agricola_id' => 'integer',
+        'safra_id' => 'integer',
+        'cultura_id' => 'integer',
+        'variedade_cultura_id' => 'integer',
+        'talhao_id' => 'integer',
+        'area_plantada' => 'double',
+        'inicio_plantio' => 'date',
+        'final_plantio' => 'date',
+        'data_prevista' => 'date',
     ];
 
 
@@ -71,21 +77,23 @@ class Fazenda extends Model
         return $this->belongsTo(\App\Models\Cadastros\Tenant::class);
     }
 
-    public function proprietario()
+    public function safra()
     {
-        return $this->belongsTo(\App\Models\Cadastros\Proprietario::class);
+        return $this->belongsTo(\App\Models\Cadastros\Safra::class);
     }
 
-    public function produtor()
+    public function cultura()
     {
-        return $this->belongsTo(\App\Models\Cadastros\Proprietario::class,'produtor_id','id');
+        return $this->belongsTo(\App\Models\Cadastros\Cultura::class);
     }
 
-    public function scopeAreaFazenda($query,$idFazenda)
+    public function variedadeCultura()
     {
-        $registro = $this::find($idFazenda);
-        return $registro;
+        return $this->belongsTo(\App\Models\Cadastros\VariedadeCultura::class);
+    }
 
-
+    public function talhao()
+    {
+        return $this->belongsTo(\App\Models\Cadastros\Talhao::class);
     }
 }

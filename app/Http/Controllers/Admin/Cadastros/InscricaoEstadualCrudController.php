@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers\Admin\Cadastros;
 
-use App\Http\Requests\Cadastros\TalhaoRequest;
-use App\Models\Cadastros\Fazenda;
-use App\Models\Cadastros\Talhao;
+use App\Http\Requests\Cadastros\InscricaoEstadualRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class TalhaoCrudController
+ * Class InscricaoEstadualCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class TalhaoCrudController extends CrudController
+class InscricaoEstadualCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -28,9 +26,9 @@ class TalhaoCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Cadastros\Talhao::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/cadastros/talhao');
-        CRUD::setEntityNameStrings('Talhão', 'Talhões');
+        CRUD::setModel(\App\Models\Cadastros\InscricaoEstadual::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/cadastros/inscricao-estadual');
+        CRUD::setEntityNameStrings('Inscrição Estadual', 'Inscrições Estaduais');
     }
 
     /**
@@ -41,24 +39,24 @@ class TalhaoCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        $this->crud->enableExportButtons();
+        CRUD::enableExportButtons();
+        CRUD::column('produtor_id')->type('relationship')
+            ->name('produtor_id')
+            ->entity('produtor')
+            ->attribute('razao_social')
+            ->size(4);
+        CRUD::column('proprietario_id')->type('select')
+            ->entity('Proprietario')
+            ->attribute('razao_social')
+            ->size(4);
+
         CRUD::column('fazenda_id')
             ->label('Fazenda.:')
             ->type('select')
             ->entity('Fazenda')
             ->attribute('nome')
             ->size(4);
-        CRUD::column('nome')->label('Talhão.:');
-        CRUD::column('area_total')
-            ->label('Área Total.:')
-            ->size(2)
-            ->type('number')
-            ->decimals(2)
-            ->suffix(' ha')
-            ->dec_point(',')
-            ->thousands_sep('.');;
-        CRUD::column('bloco')->label('Bloco.:');
-        CRUD::column('status')->label('Status.:')->type('enum');
+        CRUD::column('inscricao')->label('Inscrição.:');
     }
 
     /**
@@ -69,7 +67,25 @@ class TalhaoCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(TalhaoRequest::class);
+        CRUD::setValidation(InscricaoEstadualRequest::class);
+
+        CRUD::field('produtor_id')
+            ->type('select2')
+            ->entity('produtors')
+            
+            ->options(function ($query) {
+                return $query->leftJoin('proprietarios','proprietarios.id','produtors.proprietario_id')->orderBy('proprietarios.nome_fantasia', 'ASC')->select('proprietarios.nome_fantasia as nomeTe')->get();
+            })
+            ->attribute('nomeTe')
+            ->size(4);
+        CRUD::field('proprietario_id')
+            ->type('select2')
+            ->entity('proprietario')
+            ->attribute('nome_fantasia')
+            ->options(function ($query) {
+                return $query->orderBy('nome_fantasia', 'ASC')->get();
+            })
+            ->size(4);
 
         CRUD::field('fazenda_id')
             ->type('select2')
@@ -79,11 +95,7 @@ class TalhaoCrudController extends CrudController
                 return $query->orderBy('nome', 'ASC')->get();
             })
             ->size(4)->attributes(['id' => 'fazenda_id']);
-
-        CRUD::field('nome')->label('Talhão.:')->size(3)->attributes(['id' => 'nomeTalhao']);
-        CRUD::field('area_total')->label('Área Total.:')->size(2)->attributes(['class' => 'form-control areas','id' => 'area_total']);
-        CRUD::field('bloco')->label('Bloco.:')->size(1)->attributes(['id' => 'bloco']);
-        CRUD::field('status')->label('Status.:')->type('enum')->size(2);
+        CRUD::field('inscricao')->label('Inscrição.:')->size(3);
     }
 
     /**
@@ -95,20 +107,5 @@ class TalhaoCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
-    }
-
-
-    /**
-     * Método para verificar a area livre
-     */
-    public function areaFazenda($idFazenda)
-    {
-        $areaTotal = Fazenda::areaFazenda($idFazenda);
-        //dd($areaTotal->area_total);
-        $areaUsada = Talhao::areaUsada($idFazenda);
-        //dd($areaUsada->areas);
-        $areaLivre = ($areaTotal >= $areaUsada) ? $areaTotal : "Vazia";
-        return $areaLivre;
-        
     }
 }

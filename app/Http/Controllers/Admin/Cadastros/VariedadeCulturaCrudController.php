@@ -45,7 +45,7 @@ class VariedadeCulturaCrudController extends CrudController
             ->type('select')
             ->entity('cultura')
             ->attribute('nome')
-            ->model('App\Models\Cultura')
+            ->model('App\Models\Cadastros\Cultura')
             ->size(4);
         CRUD::column('nome')->label('Variedade.:')->size(4);
         CRUD::column('tecnologia')->label('Tecnologia.:')->size(4);

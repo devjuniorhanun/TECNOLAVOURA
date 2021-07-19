@@ -2,8 +2,16 @@
 
 namespace App\Providers;
 
-use App\Models\Cadastros\Fazenda;
-use App\Observers\Cadastros\FazendaObserver;
+use App\Models\Cadastros\{
+    Fazenda,
+    LocacaoTalhao,
+    MatrizFrete,
+    Talhao};
+use App\Observers\Cadastros\{
+    FazendaObserver,
+    LocacaoTalhaoObserver,
+    MatrizFreteObserver,
+    TalhaoObserver};
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,5 +34,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Fazenda::observe(FazendaObserver::class);
+        Talhao::observe(TalhaoObserver::class);
+        LocacaoTalhao::observe(LocacaoTalhaoObserver::class);
+        MatrizFrete::observe(MatrizFreteObserver::class);
     }
 }

@@ -35,6 +35,7 @@ class VariedadeCultura extends Model
     //Define os campos da entidade
     protected $fillable = [
         'tenant_id',
+        'ano_agricola_id',
         'cultura_id',
         'uuid',
         'nome',
@@ -51,6 +52,7 @@ class VariedadeCultura extends Model
     protected $casts = [
         'id' => 'integer',
         'tenant_id' => 'integer',
+        'ano_agricola_id' => 'integer',
         'cultura_id' => 'integer',
     ];
 

@@ -49,17 +49,20 @@ jQuery(function($){
 
      $("#nomeTalhao").focusout(function () {
         var fazendaId = $("#fazenda_id").val();
-        axios.get(`http://${url}/admin/servicoagricola/areaTalhao/${idTalhao}`)
+        axios.get(`http://${url}/admin/cadastros/talhao/areaFazenda/${fazendaId}`)
             .then(response => {
-                var areaTalhao = response.data;
-                var quantBomba = areaTalhao / capacidadeBomba
-                $("#bomba_recomendada").val(quantBomba.toFixed(3));
-                $("#area").val(areaTalhao);
+                //alert(response.data)
+                if(response.data == 'Vazia'){
+                    alert('Area ja Ultilizada');
+
+                    $("#area_total").attr("disabled", true);
+                    $("#bloco").attr("disabled", true);
+                }
             })
             .catch(error => {
                 console.log(error)
             });
-         alert(fazendaId)
+         
      });
      
 });

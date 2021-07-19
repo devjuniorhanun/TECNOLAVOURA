@@ -18,7 +18,8 @@
         <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-users"></i>Safras</a>
             <ul class="nav-dropdown-items">
-                <li class="nav-item"><a class="nav-link" href="{{ backpack_url('cadastros/safra') }}"><i class="nav-icon la la-user"></i> <span>Safras</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ backpack_url('cadastros/ano-agricola') }}"><i class="nav-icon la la-user"></i> <span>Ano Agrícola</span></a></li>    
+            <li class="nav-item"><a class="nav-link" href="{{ backpack_url('cadastros/safra') }}"><i class="nav-icon la la-user"></i> <span>Safras</span></a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('cadastros/cultura') }}"><i class="nav-icon la la-id-badge"></i> <span>Culturas</span></a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('cadastros/variedade-cultura') }}"><i class="nav-icon la la-key"></i> <span>Variedades</span></a></li>
             </ul>
@@ -30,6 +31,9 @@
                 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('cadastros/produtor') }}"><i class="nav-icon la la-user"></i> <span>Produtores</span></a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('cadastros/fazenda') }}"><i class="nav-icon la la-user"></i> <span>Fazendas</span></a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('cadastros/talhao') }}"><i class="nav-icon la la-user"></i> <span>Talhões</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ backpack_url('cadastros/locacao-talhao') }}"><i class="nav-icon la la-user"></i> <span>Locações Talhões</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ backpack_url('cadastros/matriz-frete') }}"><i class="nav-icon la la-user"></i> <span>Matrizes Fretes</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ backpack_url('cadastros/inscricao-estadual') }}"><i class="nav-icon la la-user"></i> <span>Inscrições</span></a></li>
                 
             </ul>
         </li>
